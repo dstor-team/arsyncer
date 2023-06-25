@@ -369,9 +369,24 @@ func filter(params FilterParams, tx types.Transaction) bool {
 			log.Error("utils.OwnerToAddress(tx.Owner) err", "err", err, "owner", tx.Owner)
 			return true
 		}
-		if addr != params.OwnerAddress {
+		if addr == params.OwnerAddress {
 			return true
 		}
+	}
+
+	if len(params.OwnerAddresses) > 0 {
+		// filter owner addresses, check if tx address is in the owner address array
+		addr, err := utils.OwnerToAddress(tx.Owner)
+		if err != nil {
+			log.Error("utils.OwnerToAddress(tx.Owner) err", "err", err, "owner", tx.Owner)
+			return true
+		}
+		for _, i := range params.OwnerAddresses {
+			if i == addr {
+				return true
+			}
+		}
+		return false
 	}
 
 	if params.Target != "" {
