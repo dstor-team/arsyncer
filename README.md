@@ -1,5 +1,5 @@
-# arsyncer
-
+# (forked) arsyncer
+Adding new filtering features to enable arsyncer usage in Arweave pubsub user notifications on Dstor.
 ---
 ### Install
 ```go
