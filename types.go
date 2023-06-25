@@ -15,5 +15,6 @@ type SubscribeTx struct {
 type FilterParams struct {
 	Tags         []types.Tag
 	OwnerAddress string
+	OwnerAddresses []string
 	Target       string
 }
