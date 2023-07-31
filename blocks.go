@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"errors"
 	"fmt"
+	"math"
 	"github.com/everFinance/goar"
 	"github.com/everFinance/goar/types"
 	"github.com/everFinance/goar/utils"
@@ -22,7 +23,7 @@ func GetBlockIdxs(startHeight int64, arCli *goar.Client) (*BlockIdxs, error) {
 		log.Error("arCli.GetInfo()", "err", err)
 		return nil, err
 	}
-	endHeight := info.Height
+	endHeight := int64(math.Min(float64(info.Height), float64(startHeight+5000)))
 	// get block hash_list from trust node
 	spiltList, err := arCli.GetBlockHashList(int(startHeight), int(endHeight))
 	if err != nil {
