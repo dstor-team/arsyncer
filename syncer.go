@@ -43,7 +43,7 @@ func New(startHeight int64, filterParams FilterParams, arNode string, conNum int
 	if conNum <= 0 {
 		conNum = 10 // default concurrency of number is 10
 	}
-	if stableDistance <= 0 {
+	if stableDistance < 0 {
 		stableDistance = 15 // suggest stable block distance is 15
 	}
 	arCli := goar.NewClient(arNode)
